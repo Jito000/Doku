@@ -13,9 +13,13 @@
 	$jenis_impor	        			= mysqli_real_escape_string($db,$_POST['jenis_impor']);
 	$cara_pembayaran	        		= mysqli_real_escape_string($db,$_POST['cara_pembayaran']);
 
+	$pengirim_kode_negara				= mysqli_real_escape_string($db, strtoupper($_POST['pengirim_kode_negara']));
+	$pengirim_nama_negara				= mysqli_real_escape_string($db, strtoupper($_POST['pengirim_nama_negara']));
 	$pengirim_nama	        			= mysqli_real_escape_string($db,$_POST['pengirim_nama']);
 	$pengirim_alamat	        		= mysqli_real_escape_string($db,strtoupper($_POST['pengirim_alamat']));
 
+	$penjual_kode_negara				= mysqli_real_escape_string($db, strtoupper($_POST['penjual_kode_negara']));
+	$penjual_nama_negara				= mysqli_real_escape_string($db, strtoupper($_POST['penjual_nama_negara']));
 	$penjual_nama	        			= mysqli_real_escape_string($db,$_POST['penjual_nama']);
 	$penjual_alamat	        			= mysqli_real_escape_string($db,strtoupper($_POST['penjual_alamat']));
 	
@@ -23,12 +27,17 @@
 	$importir_nomor_identitas			= mysqli_real_escape_string($db,$_POST['importir_nomor_identitas']);
 	$importir_nama	       				= mysqli_real_escape_string($db,$_POST['importir_nama']);
 	$importir_alamat					= mysqli_real_escape_string($db,strtoupper($_POST['importir_alamat']));
+	$importir_ijin						= mysqli_real_escape_string($db,strtoupper($_POST['importir_ijin']));
 
 	$pemilik_jenis_identitas	        = mysqli_real_escape_string($db,$_POST['pemilik_jenis_identitas']);
 	$pemilik_nomor_identitas			= mysqli_real_escape_string($db,$_POST['pemilik_nomor_identitas']);
 	$pemilik_nama	       				= mysqli_real_escape_string($db,$_POST['pemilik_nama']);
 	$pemilik_alamat						= mysqli_real_escape_string($db,strtoupper($_POST['pemilik_alamat']));
 
+	$pendaftaran_nomor					= mysqli_real_escape_string($db,strtoupper($_POST['pendaftaran_nomor']));
+	$pendaftaran_tanggal                = mysqli_real_escape_string($db,$_POST['pendaftaran_tanggal']);
+	$pendaftaran_tgl					= date('Y-m-d', strtotime($pendaftaran_tanggal));
+	$respon 	                       	= mysqli_real_escape_string($db,$_POST['respon']);
     $cara_angkut                       	= mysqli_real_escape_string($db,$_POST['cara_angkut']);
 	$nama_pengangkut		            = mysqli_real_escape_string($db,$_POST['nama_pengangkut']);
 	$perkiraan_tiba                     = mysqli_real_escape_string($db,$_POST['perkiraan_tiba']);
@@ -40,17 +49,19 @@
 	$invoice_nomor	        			= mysqli_real_escape_string($db, strtoupper($_POST['invoice_nomor']));
 	$invoice_tanggal					= mysqli_real_escape_string($db,$_POST['invoice_tanggal']);
 	$invoice_tgl						= date('Y-m-d', strtotime($invoice_tanggal));
+	$transaksi	       					= mysqli_real_escape_string($db, strtoupper($_POST['transaksi']));
 	$bl_nomor	       					= mysqli_real_escape_string($db, strtoupper($_POST['bl_nomor']));
 	$bl_tanggal							= mysqli_real_escape_string($db,$_POST['bl_tanggal']);
 	$bl_tgl								= date('Y-m-d', strtotime($bl_tanggal));
 	$manifest_nomor	        			= mysqli_real_escape_string($db, strtoupper($_POST['manifest_nomor']));
 	$manifest_pos						= mysqli_real_escape_string($db, strtoupper($_POST['manifest_pos']));
+	$manifest_subpos					= mysqli_real_escape_string($db,$_POST['manifest_subpos']);
 	$manifest_tanggal	       			= mysqli_real_escape_string($db,$_POST['manifest_tanggal']);
 	$manifest_tgl						= date('Y-m-d', strtotime($manifest_tanggal));
 	$tempat_penimbunan					= mysqli_real_escape_string($db,strtoupper($_POST['tempat_penimbunan']));
 
 
-	$valuta								= mysqli_real_escape_string($db,$_POST['valuta']);
+	$kurs								= mysqli_real_escape_string($db,$_POST['kurs']);
 	$nilai_cif	      	 				= mysqli_real_escape_string($db,$_POST['nilai_cif']);
 	$asuransi							= mysqli_real_escape_string($db,$_POST['asuransi']);
     $freight                	       	= mysqli_real_escape_string($db,$_POST['freight']);
@@ -61,7 +72,7 @@
 	$berat_kotor   		            	= mysqli_real_escape_string($db,$_POST['berat_kotor']);
 	$berat_bersih       	           	= mysqli_real_escape_string($db,$_POST['berat_bersih']);
 
-	$hs_code   	            			= mysqli_real_escape_string($db,$_POST['hs_code']);
+	$jenis_file   	            		= mysqli_real_escape_string($db,$_POST['jenis_file']);
     $operator	                        = mysqli_real_escape_string($db,$_POST['operator']);
 
 	$file_suratmasuk			        = $_FILES['file_suratmasuk']['name'];
@@ -108,18 +119,26 @@
 				jenis_pib					='$jenis_pib', 
 				jenis_impor					='$jenis_impor',
 				cara_pembayaran				='$cara_pembayaran',
+				pengirim_kode_negara		='$pengirim_kode_negara',
+				pengirim_nama_negara		='$pengirim_nama_negara',
 				pengirim_nama				='$pengirim_nama',
 				pengirim_alamat				='$pengirim_alamat',
+				penjual_kode_negara			='$penjual_kode_negara',
+				penjual_nama_negara			='$penjual_nama_negara',
 				penjual_nama				='$penjual_nama',
 				penjual_alamat				='$penjual_alamat',
 				importir_jenis_identitas	='$importir_jenis_identitas',
 				importir_nomor_identitas	='$importir_nomor_identitas',
 				importir_nama				='$importir_nama',
 				importir_alamat				='$importir_alamat',
+				importir_ijin				='$importir_ijin',
 				pemilik_jenis_identitas		='$pemilik_jenis_identitas',
 				pemilik_nomor_identitas		='$pemilik_nomor_identitas',
 				pemilik_nama				='$pemilik_nama',
 				pemilik_alamat				='$pemilik_alamat',
+				pendaftaran_nomor			='$pendaftaran_nomor',
+				pendaftaran_tanggal			='$pendaftaran_tgl',
+				respon						='$respon',
 				cara_angkut					='$cara_angkut',
 				nama_pengangkut				='$nama_pengangkut',
 				perkiraan_tiba				='$perkiraan__tiba',
@@ -128,13 +147,15 @@
 				pelabuhan_tujuan			='$pelabuhan_tujuan',
 				invoice_nomor				='$invoice_nomor',
 				invoice_tanggal				='$invoice_tgl',
+				transaksi					='$transaksi',
 				bl_nomor					='$bl_nomor',
 				bl_tanggal					='$bl_tgl',
 				manifest_nomor				='$manifest_nomor',
 				manifest_pos				='$manifest_pos',
+				manifest_subpos				='$manifest_subpos',
 				manifest_tanggal			='$manifest_tgl',
 				tempat_penimbunan			='$tempat_penimbunan',
-				valuta						='$valuta',
+				kurs						='$kurs',
 				nilai_cif					='$nilai_cif',
 				asuransi					='$asuransi',
 				freight						='$freight',
@@ -144,7 +165,7 @@
 				jjm							='$jjm',
 				berat_kotor					='$berat_kotor',
 				berat_bersih				='$berat_bersih',
-				hs_code						= '$hs_code',
+				jenis_file					= '$jenis_file',
                 operator            	    = '$operator',
                 tanggal_entry               = '$tanggal_entry'
                         
@@ -186,18 +207,26 @@
 				jenis_pib					='$jenis_pib', 
 				jenis_impor					='$jenis_impor',
 				cara_pembayaran				='$cara_pembayaran',
+				pengirim_kode_negara		='$pengirim_kode_negara',
+				pengirim_nama_negara		='$pengirim_nama_negara',
 				pengirim_nama				='$pengirim_nama',
 				pengirim_alamat				='$pengirim_alamat',
+				penjual_kode_negara			='$penjual_kode_negara',
+				penjual_nama_negara			='$penjual_nama_negara',
 				penjual_nama				='$penjual_nama',
 				penjual_alamat				='$penjual_alamat',
 				importir_jenis_identitas	='$importir_jenis_identitas',
 				importir_nomor_identitas	='$importir_nomor_identitas',
 				importir_nama				='$importir_nama',
 				importir_alamat				='$importir_alamat',
+				importir_ijin				='$importir_ijin',
 				pemilik_jenis_identitas		='$pemilik_jenis_identitas',
 				pemilik_nomor_identitas		='$pemilik_nomor_identitas',
 				pemilik_nama				='$pemilik_nama',
 				pemilik_alamat				='$pemilik_alamat',
+				pendaftaran_nomor			='$pendaftaran_nomor',
+				pendaftaran_tanggal			='$pendaftaran_tgl',
+				respon						='$respon',
 				cara_angkut					='$cara_angkut',
 				nama_pengangkut				='$nama_pengangkut',
 				perkiraan_tiba				='$perkiraan__tiba',
@@ -206,13 +235,15 @@
 				pelabuhan_tujuan			='$pelabuhan_tujuan',
 				invoice_nomor				='$invoice_nomor',
 				invoice_tanggal				='$invoice_tgl',
+				transaksi					='$transaksi',
 				bl_nomor					='$bl_nomor',
 				bl_tanggal					='$bl_tgl',
 				manifest_nomor				='$manifest_nomor',
 				manifest_pos				='$manifest_pos',
+				manifest_subpos				='$manifest_subpos',
 				manifest_tanggal			='$manifest_tgl',
 				tempat_penimbunan			='$tempat_penimbunan',
-				valuta						='$valuta',
+				kurs						='$kurs',
 				nilai_cif					='$nilai_cif',
 				asuransi					='$asuransi',
 				freight						='$freight',
@@ -222,7 +253,7 @@
 				jjm							='$jjm',
 				berat_kotor					='$berat_kotor',
 				berat_bersih				='$berat_bersih',
-				hs_code						= '$hs_code',
+				jenis_file					= '$jenis_file',
                 operator            	    = '$operator',
                 tanggal_entry               = '$tanggal_entry', 
 				file_suratmasuk				= '$nama_baru' 

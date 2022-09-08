@@ -183,6 +183,22 @@ include "login/ceksession.php";
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"><h2><b>Pengirim</b></h2></label>
                       </div>
+                      <!-- kode negara pengirim-->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Kode Negara <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['pengirim_kode_negara'];?>" type="text" id="pengirim_kode_negara" name="pengirim_kode_negara" required="required" placeholder="Masukkan Kode Negara" class="kode_negara form-control col-md-7 col-xs-12"style="text-transform: uppercase;">
+                        </div>
+                      </div>
+                      <!-- nama negara pengirim-->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Negara <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['pengirim_nama_negara'];?>" type="text" id="pengirim_nama_negara" name="pengirim_nama_negara" required="required" placeholder="Masukkan Nama Negara" class=" form-control col-md-7 col-xs-12" style="text-transform: uppercase;">
+                        </div>
+                      </div>
                       <!-- nama pengirim-->
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama <span class="required">*</span>
@@ -210,6 +226,22 @@ include "login/ceksession.php";
                         <label style="vertical-align: top;" class="control-label col-md-3 col-sm-3 col-xs-12" for="salin_isi">sama dengan pengirim </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input onchange="autoFillPenjual()" type="checkbox" id="salin_isi_1" name="salin_isi_1" >
+                        </div>
+                      </div>
+                      <!-- kode negara penjual-->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Kode Negara <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['penjual_kode_negara'];?>" type="text" id="penjual_kode_negara" name="penjual_kode_negara" required="required" placeholder="Masukkan Kode Negara" class="kode_negara form-control col-md-7 col-xs-12"style="text-transform: uppercase;">
+                        </div>
+                      </div>
+                      <!-- nama negara penjual-->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nama Negara <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['penjual_nama_negara'];?>" type="text" id="penjual_nama_negara" name="penjual_nama_negara" required="required" placeholder="Masukkan Nama Negara" class=" form-control col-md-7 col-xs-12"style="text-transform: uppercase;">
                         </div>
                       </div>
                       <!-- nama penjual-->
@@ -272,6 +304,14 @@ include "login/ceksession.php";
                           <textarea rows="3" type="text" id="importir_alamat" name="importir_alamat" required="required" placeholder="Masukkan alamat importir" class="form-control col-md-7 col-xs-12"><?php echo $data['importir_alamat'];?></textarea>
                         </div>
                       </div>
+                      <!-- ijin importir-->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Ijin Perusahaan <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['importir_ijin'];?>" type="text" id="importir_ijin" name="importir_ijin" required="required" placeholder="Masukkan status ijin perusahaan" class="form-control col-md-7 col-xs-12" style="text-transform: uppercase;">
+                        </div>
+                      </div>
                       <!-- separator -->
                       <div class="ln_solid"></div>
                       <!-- separator -->
@@ -329,6 +369,35 @@ include "login/ceksession.php";
                       <!-- separator -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"><h2><b>Pengiriman</b></h2></label>
+                      </div>
+                      <!-- nomor pendaftaran -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nomor Pendaftaran <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['pendaftaran_nomor'];?>" type="number" id="pendaftaran_nomor" name="pendaftaran_nomor" required="required" placeholder="Masukkan nomor" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <!-- tanggal pendaftaran -->  
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Pendaftaran <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <div class='input-group date' id='myDatepicker6'>
+                              <input value="<?php echo $data['pendaftaran_tanggal'];?>" type='text' id="pendaftaran_tanggal" name="pendaftaran_tanggal" required="required" class="form-control" required="required" readonly="readonly" />
+                              <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- respon -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Respon Bea Cukai <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['respon'];?>" type="text" id="respon" name="respon" required="required" placeholder="Masukkan respon" class="form-control col-md-7 col-xs-12">
+                        </div>
                       </div>
                       <!-- cara pengangkutan -->
                       <div class="form-group">
@@ -417,6 +486,14 @@ include "login/ceksession.php";
                           </div>
                         </div>
                       </div>
+                      <!-- transaksi -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Transaksi <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['transaksi'];?>" type="text" id="transaksi" name="transaksi" required="required" placeholder="Masukkan cara transaksi" class="transaksi form-control col-md-7 col-xs-12"style="text-transform: uppercase;">
+                        </div>
+                      </div>
                       <!-- no bl-->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">No. BL <span class="required">*</span>
@@ -454,6 +531,14 @@ include "login/ceksession.php";
                           <input value="<?php echo $data['manifest_pos'];?>" type="text" id="manifest_pos" name="manifest_pos" required="required" placeholder="Masukkan Pos manifest" class="form-control col-md-7 col-xs-12" style="text-transform: uppercase;">
                         </div>
                       </div>
+                      <!-- subpos manifest-->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">SubPos Manifest <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['manifest_subpos'];?>" type="text" id="manifest_subpos" name="manifest_subpos" required="required" placeholder="Masukkan subpos manifest" class="angka_titik form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
                       <!-- tanggal manifest -->  
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tanggal Manifest <span class="required">*</span>
@@ -482,14 +567,7 @@ include "login/ceksession.php";
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"><h2><b><!-- nama grup --></b></h2></label>
                       </div>
-                      <!-- valuta -->
-                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Valuta <span class="required">*</span>
-                        </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input value="<?php echo $data['valuta'];?>" type="text" id="valuta" name="valuta" required="required" placeholder="Masukkan valuta" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
+                      
                       <!-- nilai cif-->
                        <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nilai CIF <span class="required">*</span>
@@ -513,6 +591,14 @@ include "login/ceksession.php";
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                           <input value="<?php echo $data['freight'];?>" type="text" id="freight" name="freight" required="required" placeholder="Masukkan freight" class=" currency form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <!-- kurs -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Kurs <span class="required">*</span>
+                        </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input value="<?php echo $data['kurs'];?>" type="text" id="kurs" name="kurs" required="required" placeholder="Masukkan valuta" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <!-- ndpbm-->
@@ -570,10 +656,10 @@ include "login/ceksession.php";
                       <!-- separator -->
                       
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">HS Code<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Jenis File<span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input value="<?php echo $data['hs_code'];?>" type="text" id="hs_code" name="hs_code" required="required" placeholder="Masukkan HS Code" class="currency form-control col-md-7 col-xs-12">
+                          <input value="<?php echo $data['jenis_file'];?>" type="text" id="jenis_file" name="jenis_file" required="required" placeholder="Masukkan jenis file" class=" form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -584,16 +670,16 @@ include "login/ceksession.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Operator </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Operator <span class="required">*</span></label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input value="<?php echo $_SESSION['nama'];?>" type="text" id="operator" name="operator"  readonly="readonly" class="form-control col-md-7 col-xs-12">
+                          <input value="<?php echo $_SESSION['nama'];?>" type="text" id="operator" name="operator"  required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <a href="datasuratmasuk.php" class="btn btn-danger"><span class="glyphicon glyphicon-arrow-left"></span> Batal</a>
+                          <a href="index.php" class="btn btn-danger"><span class="glyphicon glyphicon-arrow-left"></span> Batal</a>
                           <button id="submit" type="submit" name="update" value="Update" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Simpan</button>
                           <a href="editdatatable.php?id_suratmasuk=<?php echo $data['id_suratmasuk']?>" class="btn btn-primary"><span class="glyphicon glyphicon-arrow-right"></span> Pungutan</a>
                         </div>
@@ -691,8 +777,10 @@ include "login/ceksession.php";
         format: 'DD-MM-YYYY'
     });
     
-    $("#datetimepicker6").on("dp.change", function(e) {
-        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+    $('#myDatepicker6').datetimepicker({
+        ignoreReadonly: true,
+        allowInputToggle: true,
+        format: 'DD-MM-YYYY'
     });
     
     $("#datetimepicker7").on("dp.change", function(e) {
@@ -745,10 +833,14 @@ $('input.currency').keyup(function(event){
 });
 function autoFillPenjual(){
   if(document.getElementById('salin_isi_1').checked){
+    document.getElementById('penjual_kode_negara').value=document.getElementById('pengirim_kode_negara').value;
+    document.getElementById('penjual_nama_negara').value=document.getElementById('pengirim_nama_negara').value;
     document.getElementById('penjual_nama').value=document.getElementById('pengirim_nama').value;
     document.getElementById('penjual_alamat').value=document.getElementById('pengirim_alamat').value;
   }
   else{
+    document.getElementById('penjual_kode_negara').value='';
+    document.getElementById('penjual_nama_negara').value='';
     document.getElementById('penjual_nama').value='';
     document.getElementById('penjual_alamat').value='';
   }
@@ -768,6 +860,46 @@ function autoFillPemilik(){
   
   }
 }
+$('input.kode_negara').keyup(function(event){
+  if(event.which >= 37 && event.which <= 40){return;}
+  
+    $(this).val(function(index, value){
+      return value
+      .replace(/([^a-zA-Z])/g,"").replace(/\w{4,}/g,"");
+      
+    });
+  
+});
+$('input.transaksi').keyup(function(event){
+  if(event.which >= 37 && event.which <= 40){return;}
+  
+    $(this).val(function(index, value){
+      return value
+      .replace(/([^a-zA-Z])/g,"").replace(/\w{6,}/g,"");
+      
+    });
+  
+});
+$('input.angka_titik').keyup(function(event){
+  if(event.which >= 37 && event.which <= 40){return;}
+  
+    $(this).val(function(index, value){
+      return value
+      .replace(/([^0-9.])/g,"").replace(/([.]{2,})/g,".").replace(/\w{26,}/g,"");
+      
+    });
+  
+});
+$('input.angka_titik').focusout(function(event){
+  if(event.which >= 37 && event.which <= 40){return;}
+  
+    $(this).val(function(index, value){
+      return value
+      return value.replace(/([.]$)/g,'');
+      
+    });
+  
+});
 $('input.pengajuan').keyup(function(event){
   if(event.which >= 37 && event.which <= 40){return;}
     
