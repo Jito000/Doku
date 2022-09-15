@@ -240,10 +240,7 @@ include "login/ceksession.php";
                           <td>Pelabuhan Muat</td>
                           <td><?php echo $data['pelabuhan_muat']?></td>
                         </tr>
-                        <tr>
-                          <td>Pelabuhan Transit</td>
-                          <td><?php echo $data['pelabuhan_transit']?></td>
-                        </tr>
+                        
                         <tr>
                           <td>Pelabuhan Tujuan</td>
                           <td><?php echo $data['pelabuhan_tujuan']?></td>
@@ -293,10 +290,12 @@ include "login/ceksession.php";
                           <td>Tempat Penimbunan</td>
                           <td><?php echo $data['tempat_penimbunan']?></td>
                         </tr>
+                        <tr></tr><!-- agar warna data pengirim menjadi putih, bisa dihapus jika perlu -->
                         <tr>
                           <td><h2>Lain-lain</h2> </td>
                           <td> </td>
                         </tr>
+                        
                         <tr>
                           <td>Nilai CIF</td>
                           <td><?php echo $data['nilai_cif']?></td>
@@ -339,12 +338,23 @@ include "login/ceksession.php";
                           <td><?php echo $data['berat_bersih']?></td>
                         </tr>
                         <tr>
+                          <td><h2>Detail Dokumen</h2> </td>
+                          <td> </td>
+                        </tr>
+                        <tr>
                           <td>Jenis File</td>
                           <td><?php echo $data['jenis_file']?></td>
                         </tr>
                         <tr>
                           <td>File</td>
-                          <td><a href= "<?php echo 'surat_masuk/'.$data['file_suratmasuk'].''?>"><b>Unduh File</b></a></td>
+                          <?php
+                            if($data['file_suratmasuk'] == null){
+                              echo '<td><b>Tidak ada file</b></td>';
+                            }
+                            else {
+                              echo '<td><a href= "surat_masuk/'.$data['file_suratmasuk'].'"><b>Unduh File</b></a></td>';
+                            }
+                          ?>
                         </tr>
                         <tr>
                           <td>Operator</td>

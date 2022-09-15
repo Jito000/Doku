@@ -91,7 +91,7 @@ include "login/ceksession.php";
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Kode Kantor <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" onkeyup="validPengajuan(this)" id="kode_kantor" name="kode_kantor" required="required" maxlength="35" placeholder="Masukkan kode kantor" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="kode_kantor" name="kode_kantor" required="required" maxlength="35" placeholder="Masukkan kode kantor" class="kode_kantor form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <!-- kantor pabean -->
@@ -140,6 +140,7 @@ include "login/ceksession.php";
                             <option value="none" selected disabled hidden>--- None ---</option>
                             <option value="1. Biasa">1. Biasa</option>
                             <option value="2. Berkala">2. Berkala</option>
+                            <option value="3. BC 2.3">3. BC 2.3</option>
                           </select>
                         </div>
                       </div>
@@ -437,14 +438,7 @@ include "login/ceksession.php";
                           <input type="text" id="pelabuhan_muat" name="pelabuhan_muat" required="required" placeholder="Masukkan pelabuhan muat" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                      <!-- pelabuhan transit -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Pelabuhan Transit <span class="required">*</span>
-                        </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input id="pelabuhan_transit" name="pelabuhan_transit" required="required" class="form-control" placeholder='Masukkan pelabuhan transit'>
-                        </div>
-                      </div>
+                      
                       <!-- pelabuhan tujuan -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Pelabuhan Tujuan <span class="required">*</span>
@@ -487,7 +481,12 @@ include "login/ceksession.php";
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Transaksi <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" id="transaksi" name="transaksi" required="required" placeholder="Masukkan cara transaksi" class="transaksi form-control col-md-7 col-xs-12"style="text-transform: uppercase;">
+                          <select id="transaksi" name="transaksi" required="required"  class="form-control col-md-7 col-xs-12" >
+                            <option value="none" selected disabled hidden>--- None ---</option>
+                            <option value="LAI">LAI</option>
+                            <option value="KMD">KMD</option>
+                            <option value="SLC">SLC</option>
+                          </select>
                         </div>
                       </div>
                       <!-- no bl-->
@@ -578,7 +577,7 @@ include "login/ceksession.php";
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Asuransi <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" id="asuransi" name="asuransi" required="required" placeholder="Masukkan asuransi" class="currency form-control col-md-7 col-xs-12">
+                          <input type="text" id="asuransi" name="asuransi" required="required" placeholder="Masukkan asuransi" class="currency total form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <!-- freight -->
@@ -586,7 +585,7 @@ include "login/ceksession.php";
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">FREIGHT <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" id="freight" name="freight" required="required" placeholder="Masukkan freight" class=" currency form-control col-md-7 col-xs-12">
+                          <input type="text" id="freight" name="freight" required="required" placeholder="Masukkan freight" class=" currency total form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <!-- kurs -->
@@ -605,13 +604,19 @@ include "login/ceksession.php";
                           <input type="text" id="ndpbm" name="ndpbm" required="required" placeholder="Masukkan NDPBM" class="currency form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-
+                      <!-- auto fill-->
+                      <div class="form-group">
+                        <label style="vertical-align: top;" class="control-label col-md-3 col-sm-3 col-xs-12" for="salin_total_1">Jumlahkan nilai </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input onchange="autoFillPabean()" type="checkbox" id="salin_total_1" name="salin_total_1" class="currency_pabean">
+                        </div>
+                      </div>
                       <!-- nilai pabean -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Nilai Pabean <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" id="nilai_pabean" name="nilai_pabean" required="required" placeholder="Masukkan nilai pabean" class="currency form-control col-md-7 col-xs-12">
+                          <input type="text" id="nilai_pabean" name="nilai_pabean" readonly="readonly" required="required" placeholder="Masukkan nilai pabean" class="currency_pabean form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <!-- peti kemas -->
@@ -651,6 +656,9 @@ include "login/ceksession.php";
                        <!-- separator -->
                        <div class="ln_solid"></div>
                       <!-- separator -->
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"><h2><b>Detail Dokumen</b></h2></label>
+                      </div>
                       <!-- jenis file -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Jenis file <span class="required">*</span>
@@ -661,10 +669,10 @@ include "login/ceksession.php";
                       </div>
                       <!-- file -->
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">File <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">File
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input name="file_suratmasuk" accept="application/pdf" type="file" id="file_suratmasuk" required="required" class="form-control" autocomplete="off"/> *max 10mb 
+                         <input name="file_suratmasuk" accept="application/pdf" type="file" id="file_suratmasuk" class="form-control" autocomplete="off"/> *max 10mb 
                         </div>
                       </div>
                       <div class="form-group">
@@ -794,15 +802,15 @@ function validAngka(a)
 	a.value = a.value.substring(0,a.value.length-1000);
 	}
 }
-function validPengajuan(a)
-{
-	if(/[^-0-9a-zA-Z]+$/.test(a.value) || a.value=='-')
-	{
-	a.value = a.value.substring(0,a.value.length-1000);
-
-	}
- 
-}
+$('input.kode_kantor').keyup(function(event){
+  if(event.which >= 37 && event.which <= 40){return;}
+  
+    $(this).val(function(index, value){
+      return value
+      .replace(/([^a-zA-Z\d\s])/g,"").replace(/\s{2,}/g," ");
+      
+    });
+});
 function autoFillPenjual(){
   if(document.getElementById('salin_isi_1').checked){
     document.getElementById('penjual_kode_negara').value=document.getElementById('pengirim_kode_negara').value;
@@ -849,7 +857,7 @@ $('input.currency').keyup(function(event){
         
       }
       else{
-        return value
+        return value      
       .replace(/([^0-9.])/g,"")  // mencari yang bukan (^) angka 0-9 kecuali . mengganti dengan nilai kosong
       .replace(/\B(?=(\d{3})+(?!\d))/g,",") // membuat otomatis angka menjadi ribuan, ratusan dll
       
@@ -858,6 +866,28 @@ $('input.currency').keyup(function(event){
     });
   
 });
+function autoFillPabean(){
+  if(document.getElementById('salin_total_1').checked){
+      //set value to 0 if input is empty
+      if(document.getElementById('nilai_cif').value ==""){document.getElementById('nilai_cif').value ='0.0';}
+      if(document.getElementById('asuransi').value  ==""){document.getElementById('asuransi').value ='0.0';}
+      if(document.getElementById('freight').value   ==""){document.getElementById('freight').value ='0.0';}
+      if(document.getElementById('ndpbm').value     ==""){document.getElementById('ndpbm').value ='0.0';}
+
+      //save value to nilai pabean
+      document.getElementById('nilai_pabean').value = (
+        + parseFloat(document.getElementById('nilai_cif').value.replace(/([^0-9.])/g,""))
+        + parseFloat(document.getElementById('asuransi').value.replace(/([^0-9.])/g,""))
+        + parseFloat(document.getElementById('freight').value.replace(/([^0-9.])/g,""))
+        + parseFloat(document.getElementById('ndpbm').value.replace(/([^0-9.])/g,""))
+      );
+      //change value pabean to currency format
+      document.getElementById('nilai_pabean').value = document.getElementById('nilai_pabean').value.replace(/\B(?=(\d{3})+(?!\d))/g,",");
+  }
+  else{
+    document.getElementById('nilai_pabean').value = '0.0';
+  }
+}
 $('input.kode_negara').keyup(function(event){
   if(event.which >= 37 && event.which <= 40){return;}
   
@@ -918,7 +948,6 @@ $('input.pengajuan').focusout(function(event){
     });
   
 });
-
 </script>
 </body>
 </html>

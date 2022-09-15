@@ -96,7 +96,7 @@ include "login/ceksession.php";
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Kode Kantor <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input value="<?php echo $data['kode_kantor'];?>" type="text" onkeyup="validPengajuan(this)" id="kode_kantor" name="kode_kantor" required="required" maxlength="35" placeholder="Masukkan kode kantor" class="form-control col-md-7 col-xs-12">
+                          <input value="<?php echo $data['kode_kantor'];?>" type="text" id="kode_kantor" name="kode_kantor" required="required" maxlength="35" placeholder=" Masukkan kode kantor" class="kode_kantor form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <!-- kantor pabean -->
@@ -145,6 +145,7 @@ include "login/ceksession.php";
                             <option value="<?php echo $data['jenis_pib'];?>" selected hidden><?php echo $data['jenis_pib'];?></option>
                             <option value="1. Biasa">1. Biasa</option>
                             <option value="2. Berkala">2. Berkala</option>
+                            <option value="3. BC 2.3">3. BC 2.3</option>
                           </select>
                         </div>
                       </div>
@@ -441,14 +442,7 @@ include "login/ceksession.php";
                           <input value="<?php echo $data['pelabuhan_muat'];?>" type="text" id="pelabuhan_muat" name="pelabuhan_muat" required="required" placeholder="Masukkan pelabuhan muat" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                      <!-- pelabuhan transit -->
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Pelabuhan Transit <span class="required">*</span>
-                        </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input value="<?php echo $data['pelabuhan_transit'];?>" id="pelabuhan_transit" name="pelabuhan_transit" required="required" class="form-control" placeholder='Masukkan pelabuhan transit'>
-                        </div>
-                      </div>
+                      
                       <!-- pelabuhan tujuan -->
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Pelabuhan Tujuan <span class="required">*</span>
@@ -491,7 +485,12 @@ include "login/ceksession.php";
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Transaksi <span class="required">*</span>
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input value="<?php echo $data['transaksi'];?>" type="text" id="transaksi" name="transaksi" required="required" placeholder="Masukkan cara transaksi" class="transaksi form-control col-md-7 col-xs-12"style="text-transform: uppercase;">
+                          <select id="transaksi" name="transaksi" required="required"  class="form-control col-md-7 col-xs-12" >
+                            <option value="<?php echo $data['transaksi'];?>" selected hidden><?php echo $data['transaksi'];?></option>
+                            <option value="LAI">LAI</option>
+                            <option value="KMD">KMD</option>
+                            <option value="SLC">SLC</option>
+                          </select>
                         </div>
                       </div>
                       <!-- no bl-->
@@ -654,7 +653,10 @@ include "login/ceksession.php";
                        <!-- separator -->
                        <div class="ln_solid"></div>
                       <!-- separator -->
-                      
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name"><h2><b>Detail Dokumen</b></h2></label>
+                      </div>
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Jenis File<span class="required">*</span>
                         </label>
@@ -663,10 +665,17 @@ include "login/ceksession.php";
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">File <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">File
                         </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                         <input name="file_suratmasuk" accept="application/pdf" type="file" id="file_suratmasuk" class="form-control" autocomplete="off"/><a href= "<?php echo 'surat_masuk/'.$data['file_suratmasuk'].''?>"><b>Lihat File Sebelumnya</b></a></input> (Maksimal 10 MB ) 
+                         <input name="file_suratmasuk" accept="application/pdf" type="file" id="file_suratmasuk" class="form-control" autocomplete="off"/>
+                         <?php
+                            if($data['file_suratmasuk'] != null){
+                              echo '<a href= "surat_masuk/'.$data['file_suratmasuk'].'"><b>Lihat File Sebelumnya</b></a>';
+                            }
+                          ?>
+                         
+                        </input> (Maksimal 10 MB ) 
                         </div>
                       </div>
                       <div class="form-group">
@@ -796,14 +805,16 @@ function validAngka(a)
 	a.value = a.value.substring(0,a.value.length-1000);
 	}
 }
-function validPengajuan(a)
-{
-	if(/[/]+$/.test(a.value) || /[/]+$/.test(a.value))
-	{
-	a.value = a.value.substring(0,a.value.length-1000);
-	}
-}
-$('input.currency').keyup(function(event){
+$('input.kode_kantor').keyup(function(event){
+  if(event.which >= 37 && event.which <= 40){return;}
+  
+    $(this).val(function(index, value){
+      return value
+      .replace(/([^a-zA-Z\s])/g,"").replace(/\s{2,}/g," ");
+      
+    });
+  
+});$('input.currency').keyup(function(event){
   if(event.which >= 37 && event.which <= 40){return;}
   
     $(this).val(function(index, value){

@@ -58,7 +58,7 @@ include "login/ceksession.php";
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Dokumen</h2>
-                    <a href="inputsuratmasuk.php"><button style="float: right;" type="button" class="btn btn-success"><i class="fa fa-plus"></i> Tambah Dokumen Baru</button></a>
+                    <a href="inputsuratmasuk.php"><button style="float: right;" type="button" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i> Tambah Dokumen Baru</button></a>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -105,7 +105,12 @@ include "login/ceksession.php";
                               <td>  '. $data['invoice_nomor'].'       </td>
                               <td>  '. $data['bl_nomor'].'       </td>
                               <td style="text-align:center;">
-                              <a href= "surat_masuk/'.$data['file_suratmasuk'].'"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-download"></i></button></a>
+                              '.(
+                                //if has file show button
+                                ($data['file_suratmasuk']!=null) ?
+                                '<a href= "surat_masuk/'.$data['file_suratmasuk'].'"><button type="button" title="Unduh File" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-download"></i></button></a>'
+                                : ""
+                              ).'
                               <a href= "detail-suratmasuk.php?id_suratmasuk='.$data['id_suratmasuk'].'"><button type="button" title="Detail" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-info-sign"></i></button></a>
                               <a href= "editsuratmasuk.php?id_suratmasuk='.$data['id_suratmasuk'].'"><button type="button" title="Edit" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></button></a>
                               <a onclick="return konfirmasi()" href="proses/proses_hapussuratmasuk.php?id_suratmasuk='.$data['id_suratmasuk'].'"><button type="button" title="Hapus" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></button></a>

@@ -20,7 +20,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-users"></i> Akun <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="glyphicon glyphicon-user"></i> &emsp; Akun </a>
                     <ul class="nav child_menu">
                       <li><a href="profile.php"><i class="fa"></i>Profil</a></li>
                       <li><a href="../koneksi/proses_logout.php"><i class="fa"></i>Logout</a></li>

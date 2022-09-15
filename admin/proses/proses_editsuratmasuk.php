@@ -1,4 +1,7 @@
+<!DOCTYPE html>
+	<Center>
 <?php
+	error_reporting(0);	//disable this if you want debug code
 	session_start();
 	include '../../koneksi/koneksi.php';
     $id				                    = mysqli_real_escape_string($db,$_POST['id_suratmasuk']);
@@ -43,7 +46,6 @@
 	$perkiraan_tiba                     = mysqli_real_escape_string($db,$_POST['perkiraan_tiba']);
 	$perkiraan__tiba					= date('Y-m-d', strtotime($perkiraan_tiba));
 	$pelabuhan_muat   	            	= mysqli_real_escape_string($db,$_POST['pelabuhan_muat']);
-	$pelabuhan_transit   	            = mysqli_real_escape_string($db,$_POST['pelabuhan_transit']);
 	$pelabuhan_tujuan                  	= mysqli_real_escape_string($db,$_POST['pelabuhan_tujuan']);
 
 	$invoice_nomor	        			= mysqli_real_escape_string($db, strtoupper($_POST['invoice_nomor']));
@@ -80,33 +82,21 @@
 	$tanggal_entry  					= date("Y-m-d H:i:s");
     $thnNow 							= date("Y");
 	
-	$sql  		= "SELECT * FROM tb_suratmasuk where id_suratmasuk='".$id."'";                        
-	$query  	= mysqli_query($db, $sql);
-	$data 		= mysqli_fetch_array($query);
+	$sql  								= "SELECT nomor_pengajuan FROM tb_suratmasuk where nomor_pengajuan='".$nomor_pengajuan."'";                        
+	$query  							= mysqli_query($db, $sql);
+	$dataDicari 						= mysqli_fetch_array($query);
+
+	$sql  								= "SELECT nomor_pengajuan FROM tb_suratmasuk where id_suratmasuk='".$id."'";                        
+	$query  							= mysqli_query($db, $sql);
+	$dataSekarang 						= mysqli_fetch_array($query);
 	
     //jika file tidak ada
 	if ($file_suratmasuk == ''  ){
-		if ($nomor_pengajuan!=$data['nomor_pengajuan']) {
-			echo "<!DOCTYPE html>
-					<Center>
-						<h2><br>Loading...</h2>
-		  			</center>
-					<script type='text/javascript'>
-						alert('Input Tidak Sesui! ulangi kembali...');
+		if ( !is_null($dataDicari['nomor_pengajuan']) and $dataDicari['nomor_pengajuan'] != $dataSekarang['nomor_pengajuan']) {
+			echo "<h2><br>Loading...</h2><script type='text/javascript'>
+						alert('Nomor pengajuan telah ada');
 					</script>
-		  			<meta http-equiv='refresh' content='2;url=../editsuratmasuk.php?id_suratmasuk=".$id."'>
-				  </html>";
-		}
-		else if ($halaman!=$data['halaman']) {
-			echo "<!DOCTYPE html>
-					<Center>
-						<h2><br>Loading...</h2>
-		  			</center>
-					<script type='text/javascript'>
-						alert('Input Tidak Sesui! ulangi kembali...');
-					</script>
-		  			<meta http-equiv='refresh' content='2;url=../editsuratmasuk.php?id_suratmasuk=".$id."'>
-				  </html>";
+		  			<meta http-equiv='refresh' content='2;url=../editsuratmasuk.php?id_suratmasuk=".$id."'>";
 		}
 		else{
 			$sql = "UPDATE tb_suratmasuk set 
@@ -143,7 +133,6 @@
 				nama_pengangkut				='$nama_pengangkut',
 				perkiraan_tiba				='$perkiraan__tiba',
 				pelabuhan_muat				='$pelabuhan_muat',
-				pelabuhan_transit			='$pelabuhan_transit', 
 				pelabuhan_tujuan			='$pelabuhan_tujuan',
 				invoice_nomor				='$invoice_nomor',
 				invoice_tanggal				='$invoice_tgl',
@@ -173,14 +162,10 @@
 				
 			$execute = mysqli_query($db, $sql);			
 						
-			echo "<!DOCTYPE html>
-			<Center>
-				<h2><br>Update Success<br>
+			echo "<h2><br>Update Success<br>
 	
 					Loading...</h2>
-			  </center>
-			  <meta http-equiv='refresh' content='2;url=../detail-suratmasuk.php?id_suratmasuk=".$id."'>
-		  </html>";	
+					<meta http-equiv='refresh' content='2;url=../detail-suratmasuk.php?id_suratmasuk=".$id."'>";	
 		}
 		
 	}	
@@ -231,7 +216,6 @@
 				nama_pengangkut				='$nama_pengangkut',
 				perkiraan_tiba				='$perkiraan__tiba',
 				pelabuhan_muat				='$pelabuhan_muat',
-				pelabuhan_transit			='$pelabuhan_transit', 
 				pelabuhan_tujuan			='$pelabuhan_tujuan',
 				invoice_nomor				='$invoice_nomor',
 				invoice_tanggal				='$invoice_tgl',
@@ -261,27 +245,19 @@
 				
 			$execute = mysqli_query($db, $sql);			
 		
-			echo "<!DOCTYPE html>
-					<Center>
-						<h2><br>Update Success<br>
-			
-							Loading...</h2>
-		  			</center>
-		  			<meta http-equiv='refresh' content='2;url=../detail-suratmasuk.php?id_suratmasuk=".$id."'>
-				  </html>";			
+			echo "<h2><br>Update Success<br>
+					Loading...</h2>
+					<meta http-equiv='refresh' content='2;url=../detail-suratmasuk.php?id_suratmasuk=".$id."'>";			
 		}
 		else{
-			echo "<!DOCTYPE html>
-					<Center>
-						<h2><br>Loading...</h2>
-		  			</center>
+			echo "<h2><br>Loading...</h2>
 					<script type='text/javascript'>
 						alert('Input Tidak Sesui! ulangi kembali...');
 					</script>
-		  			<meta http-equiv='refresh' content='2;url=../editsuratmasuk.php?id_suratmasuk=".$id."'>
-				  </html>";		
+		  			<meta http-equiv='refresh' content='2;url=../editsuratmasuk.php?id_suratmasuk=".$id."'>";		
 		}
 	
 	}
 	?>
-	
+	</Center>
+</html>
